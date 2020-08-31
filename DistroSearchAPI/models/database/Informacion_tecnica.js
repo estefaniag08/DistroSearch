@@ -8,19 +8,19 @@ const Informacion_tecnica = db.define('Informacion_tecnica', {
         autoincrement: true
     },
     arquitectura: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(10)
     },
     interfaz_grafica: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(100)
     },
     sistema_gestion_paquetes: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50)
     },
     metodo_actualizacion: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50)
     },
     versiones: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(200)
     },
     distribucion_id: {
         type: DataTypes.INTEGER
@@ -28,4 +28,6 @@ const Informacion_tecnica = db.define('Informacion_tecnica', {
 }, {
     underscorsed: true,
     freezeTableName: true
-})
+});
+
+module.exports = Informacion_tecnica;

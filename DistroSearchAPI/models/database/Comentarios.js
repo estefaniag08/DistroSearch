@@ -1,5 +1,6 @@
 const {Sequelize, DataTypes} = require('sequelize');
 const db = require('../../config/db');
+const Usuario = require('./Usuario');
 
 const Comentarios = db.define('comentarios', {
     id_comentario: {
@@ -8,10 +9,17 @@ const Comentarios = db.define('comentarios', {
         autoincrement: true
     },
     texto_comentario: {
-        type: DataTypes.INTEGER
+        type: DataTypes.TEXT,
+        allowNull: false
     }
 }, {
     underscorsed: true,
     freezeTableName: true
 });
-
+Usuario.hasMany(Comentarios, {
+    foreignKey: {
+        name: 'usuario_id',
+        allowNull: false
+    }
+});
+module.exports = Comentarios;

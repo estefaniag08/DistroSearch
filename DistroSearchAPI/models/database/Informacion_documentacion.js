@@ -10,20 +10,21 @@ const Informacion_documentacion = db.define('informacion_documentacion', {
         autoincrement: true
     },
     url_distribucion: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50)
     },
     url_documentacion: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50)
     },
     url_instalacion: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50)
     },
     distribucion_id: {
         type: DataTypes.INTEGER
     }
 }, {
     underscorsed: true,
-    freezeTableName: true
+    freezeTableName: true,
+    alter: true
 });
 
 //Informacion_documentacion.belongsTo(Distribucion);

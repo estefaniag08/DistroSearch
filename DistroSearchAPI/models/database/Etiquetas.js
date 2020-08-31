@@ -8,9 +8,13 @@ const Etiquetas = db.define('etiquetas', {
         autoincrement: true
     },
     nombre_etiqueta: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING(50),
+        allowNull: false
     }
 }, {
     underscorsed: true,
-    freezeTableName: true
-})
+    freezeTableName: true,
+    alter: true
+});
+
+module.exports = Etiquetas;
