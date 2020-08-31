@@ -2,6 +2,7 @@
 /tmp
 /out-tsc
 .env
+variables.env
 .idea
 .project
 .classpath
