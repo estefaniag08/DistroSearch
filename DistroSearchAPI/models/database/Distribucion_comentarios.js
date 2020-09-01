@@ -5,7 +5,7 @@ const Distribucion_comentarios = db.define('distribucion_comentarios', {
     id_distro_comentario: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     }
 }, {
     underscorsed: true,

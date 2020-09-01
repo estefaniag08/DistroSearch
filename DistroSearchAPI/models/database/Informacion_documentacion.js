@@ -7,7 +7,7 @@ const Informacion_documentacion = db.define('informacion_documentacion', {
     id_informacion_documentacion: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     url_distribucion: {
         type: DataTypes.STRING(50)

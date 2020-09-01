@@ -6,7 +6,7 @@ const Informacion_general = db.define('informacion_general', {
     id_informacion_general: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     descripcion: {
         type: DataTypes.TEXT

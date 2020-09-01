@@ -6,7 +6,7 @@ const Usuario = db.define('usuario', {
     id_usuario: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     alias: {
         type: DataTypes.STRING(45),

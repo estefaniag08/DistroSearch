@@ -5,7 +5,7 @@ const Etiquetas = db.define('etiquetas', {
     id_etiqueta: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     nombre_etiqueta: {
         type: DataTypes.STRING(50),

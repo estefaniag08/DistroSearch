@@ -5,7 +5,7 @@ const Informacion_tecnica = db.define('Informacion_tecnica', {
     id_informacion_tecnica: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     arquitectura: {
         type: DataTypes.STRING(10)

@@ -33,21 +33,28 @@ module.exports = function(){
     router.get('distribuciones/etiquetas/:etiqueta' );
 
     //Mostrar las hijas de una distribución por su nombre
-    router.get('/distribuciones/:nombreDistro/nodos', databaseControler.anadirComentario );
+    router.get('/distribuciones/:nombreDistro/nodos');
 
     //Añadir una distribución (Toda la información)
     router.post('/distribuciones', databaseControler.anadirDistribucion);
 
     //Añadir un comentario a una distribución
-    router.post('/distribuciones/:nombreDistro/comentarios' );
+    router.post('/distribuciones/:nombreDistro/comentarios', databaseControler.anadirComentario);
+    
+    //Registrar nuevo usuario
+    router.post('/usuarios', databaseControler.registrarUsuario)
 
     //Añadir una etiqueta existente a una distribución
-    router.post('/distribuciones/:nombreDistro/etiquetas' );
+    router.post('/distribuciones/:nombreDistro/etiquetas', databaseControler.anadirEtiquetaADistro);
+
+    //Crear una etiqueta
+    router.post('/etiquetas', databaseControler.crearEtiqueta);
 
     //Votar por una etiqueta de una distribución
-    router.put('/distribuciones/:nombreDistro/etiquetas/:etiqueta' );
+    router.put('/distribuciones/:nombreDistro/etiquetas', databaseControler.votarEtiqueta );
+
     //Modificar la información de la distribución
-    router.put('/distribuciones/:nombreDistro' );
+    router.put('/distribuciones/:nombreDistro');
 
     return router;
 }   

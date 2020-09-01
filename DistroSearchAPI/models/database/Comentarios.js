@@ -6,7 +6,7 @@ const Comentarios = db.define('comentarios', {
     id_comentario: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     texto_comentario: {
         type: DataTypes.TEXT,

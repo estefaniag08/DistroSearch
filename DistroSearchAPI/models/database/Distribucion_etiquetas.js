@@ -5,7 +5,7 @@ const Distribucion_etiquetas = db.define('distribucion_etiquetas', {
     id_distro_etiqueta: {
         type: DataTypes.INTEGER,
         primaryKey: true,
-        autoincrement: true
+        autoIncrement: true
     },
     votos: {
         type: DataTypes.INTEGER
