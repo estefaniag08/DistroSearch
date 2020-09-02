@@ -27,7 +27,7 @@ const Informacion_documentacion = db.define('informacion_documentacion', {
     alter: true
 });
 
-//Informacion_documentacion.belongsTo(Distribucion);
+//Informacion_documentacion.hasOne(Distribucion);
 
 module.exports = Informacion_documentacion;
 
