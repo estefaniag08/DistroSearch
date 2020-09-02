@@ -6,6 +6,9 @@ const Distribucion_etiquetas = require('./Distribucion_etiquetas');
 const Informacion_tecnica = require('./Informacion_tecnica');
 const Informacion_general = require('./Informacion_general');
 const Distribucion_comentarios = require('./Distribucion_comentarios');
+const Comentarios = require('./Comentarios');
+//const Distribucion_etiqueta = require('./Distribucion_etiquetas');
+const Etiqueta = require('./Etiquetas');
 
 const Distribucion = db.define('distribucion', {
     id_distribucion: {
@@ -34,6 +37,11 @@ const Distribucion = db.define('distribucion', {
     alter: true
 });
 
+Distribucion.hasOne(Informacion_documentacion, {
+    foreignKey: {
+        name: 'distribucion_id'
+    }
+});
 // Llave foránea distribucion_id en la tabla Informacion_documentacion
 Informacion_documentacion.belongsTo(Distribucion,{
     foreignKey:{
@@ -41,8 +49,22 @@ Informacion_documentacion.belongsTo(Distribucion,{
     }
 });
 
+
+Distribucion.hasOne(Informacion_tecnica, {
+    foreignKey: {
+        name: 'distribucion_id'
+    }
+});
+
 Informacion_tecnica.belongsTo(Distribucion,{
     foreignKey:{
+        name: 'distribucion_id'
+    }
+});
+
+
+Distribucion.hasOne(Informacion_general, {
+    foreignKey: {
         name: 'distribucion_id'
     }
 });
@@ -62,12 +84,13 @@ Distribucion.belongsTo(Distribucion, {
 });
 
 //Lláve foránea en distribucion_id en Distribucion_etiquetas
-Distribucion.hasMany(Distribucion_etiquetas,{
-    foreignKey:{
-        name: 'distribucion_id',
-        allowNull: false
+
+
+Distribucion_comentarios.belongsTo(Distribucion, {
+    foreignKey: {
+        name: 'distribucion_id'
     }
-});
+})
 
 Distribucion.hasMany(Distribucion_comentarios,{
     foreignKey:{
@@ -76,4 +99,60 @@ Distribucion.hasMany(Distribucion_comentarios,{
     }
 });
 
+
+Distribucion_comentarios.belongsTo(Comentarios, {
+    foreignKey: {
+        name: 'comentario_id'
+    }
+})
+
+Comentarios.hasMany(Distribucion_comentarios,{
+    foreignKey:{
+        name: 'comentario_id',
+        allowNull: false
+    }
+});
+
+////////////////////
+
+Distribucion_etiquetas.belongsTo(Distribucion, {
+    foreignKey: {
+        name: 'distribucion_id'
+    }
+})
+
+Distribucion.hasMany(Distribucion_etiquetas,{
+    foreignKey:{
+        name: 'distribucion_id',
+        allowNull: false
+    }
+});
+
+
+Distribucion_etiquetas.belongsTo(Etiqueta, {
+    foreignKey: {
+        name: 'etiqueta_id'
+    }
+})
+
+Etiqueta.hasMany(Distribucion_etiquetas,{
+    foreignKey:{
+        name: 'etiqueta_id',
+        allowNull: false
+    }
+});
+
+
+/*
+Distribucion.belongsToMany(Comentarios, {
+    through: Distribucion_comentarios, 
+    uniqueKey: 'distribucion_id'
+});
+
+Comentarios.belongsToMany(Distribucion, {
+    through: Distribucion_comentarios, 
+    uniqueKey: 'comentario_id'
+});
+
+*/
 module.exports = Distribucion;
