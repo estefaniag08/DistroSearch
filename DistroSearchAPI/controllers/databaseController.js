@@ -17,27 +17,31 @@ exports.mostrarDistribuciones = async (req, res) => {
     } catch (error){
         res.status(500).send(error);
     }
-
 }
 
 exports.mostrarDistribucion = async (req, res) => {
     try {
         const distribucion = await Distribucion.findOne({ 
+            attributes: { exclude: ['createdAt', 'updatedAt']},
             where: { 
                 nombre_distribucion: req.params.nombreDistro 
             },
             include: [{
                 model: Informacion_documentacion,
-                exclude:['createdAt', 'updatedAt']
-            },{
-                model: Informacion_general
-            },{
-                model: Informacion_tecnica   
+                attributes: { exclude: ['createdAt', 'updatedAt']}
+            },
+            {
+                model: Informacion_general,
+                attributes: { exclude: ['createdAt', 'updatedAt']}
+            },
+            {
+                model: Informacion_tecnica,
+                attributes: { exclude: ['createdAt', 'updatedAt']}  
             }]   
         });
         res.status(200).json(distribucion);
     } catch (error) {
-        res.status(500).send(error);        
+        res.status(500).send(error.message);        
     }
 }
 
@@ -51,6 +55,7 @@ exports.mostrarInfoGeneral = async (req, res) => {
             },
             include: {
                 model: Informacion_general,
+                attributes: { exclude: ['createdAt', 'updatedAt']},
                 right: true
             }
         })
@@ -69,6 +74,7 @@ exports.mostrarInfoTecnica = async (req, res) => {
             },
             include: {
                 model: Informacion_tecnica,
+                attributes: { exclude: ['createdAt', 'updatedAt']},
                 right: true
             }
         })
@@ -87,6 +93,7 @@ exports.mostrarInfoDoc = async (req, res) => {
             },
             include: {
                 model: Informacion_documentacion,
+                attributes: { exclude: ['createdAt', 'updatedAt']},
                 right: true
             }
         })
@@ -105,14 +112,59 @@ exports.mostrarComentarios = async (req, res) => {
             },
             include: [{
                 model: Distribucion_comentarios,
+                attributes: ['comentario_id'],
                 include: [{
-                    model: Comentarios
+                    model: Comentarios,
+                    attributes: { exclude: ['createdAt', 'updatedAt']}
                 }]
             }]
         })
         res.status(200).json(distribucion);
     } catch (error) {
-        res.status(500).send(error);        
+        res.status(500).send(error.message);        
+    }
+}
+
+
+exports.mostrarEtiquetas = async (req, res) => {
+    try {
+        const distribucion = await Distribucion.findOne({
+            attributes: ['id_distribucion', 'nombre_distribucion'],
+            where: { 
+                nombre_distribucion: req.params.nombreDistro 
+            },
+            include: [{
+                model: Distribucion_etiquetas,
+                attributes: ['etiqueta_id'],
+                include: [{
+                    model: Etiquetas,
+                    attributes: { exclude: ['createdAt', 'updatedAt']}
+                }]
+            }]
+        })
+        res.status(200).json(distribucion);
+    } catch (error) {
+        res.status(500).send(error.message);        
+    }
+}
+
+exports.mostrarDistribucionesEtiqueta = async (req, res) => {
+    try{
+        const listaDistribuciones = await Etiquetas.findOne({
+            where: {
+                nombre_etiqueta: req.params.etiqueta
+            },
+            include: [{
+                model: Distribucion_etiquetas,
+                include: [{
+                    model: Distribucion
+                }]
+            }]
+            
+        });
+        res.status(200).json(listaDistribuciones);
+    } catch (error){
+        res.status(500).send(error);
     }
 }
 

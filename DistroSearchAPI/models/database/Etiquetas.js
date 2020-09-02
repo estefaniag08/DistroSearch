@@ -17,4 +17,5 @@ const Etiquetas = db.define('etiquetas', {
     alter: true
 });
 
+
 module.exports = Etiquetas;
