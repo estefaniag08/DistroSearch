@@ -29,7 +29,7 @@ module.exports = function(){
     router.get('/distribuciones/:nombreDistro/etiquetas', databaseControler.mostrarEtiquetas );
     
     //Mostrar todas las distribuciones que tengan la etiqueta especificada
-    router.get('/distribuciones/etiquetas/:etiqueta', databaseControler.mostrarDistribucionesEtiqueta );
+    router.get('/distribuciones/etiquetas/votos', databaseControler.mostrarDistribucionesEtiqueta );
     
     //Mostrar las hijas de una distribución por su nombre
     router.get('/distribuciones/:nombreDistro/nodos');

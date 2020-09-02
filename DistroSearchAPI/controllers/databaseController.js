@@ -150,10 +150,11 @@ exports.mostrarEtiquetas = async (req, res) => {
 
 exports.mostrarDistribucionesEtiqueta = async (req, res) => {
     try{
+        const {etiqueta_nombre} = req.body;
         const listaDistribuciones = await Etiquetas.findOne({
             attributes: { exclude: ['createdAt', 'updatedAt']},
             where: {
-                nombre_etiqueta: req.params.etiqueta
+                nombre_etiqueta: etiqueta_nombre
             },
             include: [{
                 attributes: ['votos'],
@@ -409,9 +410,13 @@ exports.votarEtiqueta = async (req, res) => {
         if(!etiqueta){
             res.status(500).send('No se encontró la etiqueta');
         } else {
+            
             const distribucion = await Distribucion.findOne({
-                where: req.params.nombreDistro
+                where:{
+                    nombre_distribucion: req.params.nombreDistro
+                } 
             })
+
             if(!distribucion){
                 res.status(500).send('No se encontró la distribución');
             } else {
@@ -431,7 +436,7 @@ exports.votarEtiqueta = async (req, res) => {
     }
 }
 //FALTAAAAA
-exports.modificarDistribucion = (req, res) => {
+exports.modificarDistribucion = async (req, res) => {
     try{
         await Distribucion.update({
             fecha_ultima_version,

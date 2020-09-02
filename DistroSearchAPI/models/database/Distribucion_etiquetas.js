@@ -15,11 +15,5 @@ const Distribucion_etiquetas = db.define('distribucion_etiquetas', {
     freezeTableName: true
 });
 
-Etiquetas.hasMany(Distribucion_etiquetas, {
-    foreignKey:{
-        name: 'etiqueta_id',
-        allowNull: false
-    }
-});
 
 module.exports = Distribucion_etiquetas;
