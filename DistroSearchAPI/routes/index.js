@@ -53,7 +53,7 @@ module.exports = function(){
     router.put('/distribuciones/:nombreDistro/etiquetas', databaseControler.votarEtiqueta);
 
     //Modificar la información de la distribución
-    router.put('/distribuciones/:nombreDistro', databaseControler.modificarDistribucion);
+    //router.put('/distribuciones/:nombreDistro', databaseControler.modificarDistribucion);
 
     return router;
 }   
