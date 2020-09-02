@@ -5,7 +5,7 @@ const databaseControler = require('../controllers/databaseController');
 module.exports = function(){
     //Saludo del bot Ñu
     router.get('/', function(req, res) {
-        res.json('Holis')
+        res.json('Hola, estás conectado al API DistroSearch');
     });
     //Mostrar todas las distribuciones de la base de datos
     router.get('/distribuciones', databaseControler.mostrarDistribuciones);
