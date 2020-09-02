@@ -172,6 +172,24 @@ exports.mostrarDistribucionesEtiqueta = async (req, res) => {
     }
 }
 
+exports.mostrarHijasDistribucion = async (req, res) => {
+    try {
+        const distro = await Distribucion.findOne({
+            //attributes: { exclude: ['createdAt', 'updatedAt']},
+            where: {
+                nombre_distribucion: req.params.nombreDistro 
+            },
+            include: [{
+                model: Distribucion, as: 'hijos'
+                //attributes: { exclude: ['createdAt', 'updatedAt']}
+            }]
+        })
+        res.status(200).json(distro);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
 /**
  * Json con la información que puede ir para añadir
  * @param nombre_distribucion Obligatorio
@@ -437,6 +455,8 @@ exports.votarEtiqueta = async (req, res) => {
 }
 //FALTAAAAA
 exports.modificarDistribucion = async (req, res) => {
+    const {fecha_ultima_version, descripcion, estado, idiomas, requerimientos, 
+        historia, url_distribucion, url_documentacion, url_instalacion} = req.body;
     try{
         await Distribucion.update({
             fecha_ultima_version,
@@ -444,7 +464,50 @@ exports.modificarDistribucion = async (req, res) => {
             where: {
                 nombre_distribucion: req.params.nombreDistro
             }
+        });
+        
+        const distribucion = await Distribucion.findOne({
+            where: {
+                nombre_distribucion: req.params.nombreDistro
+            }
         })
+    
+        await Informacion_tecnica.update({
+            arquitectura,
+            interfaz_grafica,
+            sistema_gestion_paquetes,
+            metodo_actualizacion,
+            versiones
+        },{
+            where: {
+                distribucion_id: distribucion.id_distribucion
+            }
+        });
+   
+        await Informacion_general.update({
+            descripcion,
+            estado,
+            idiomas,
+            requerimientos,
+            historia
+        },{
+            where:{
+                distribucion_id: distribucion.id_distribucion
+            }
+        });
+        
+        
+/*
+        await Informacion_documentacion.update({
+            url_distribucion,
+            url_documentacion,
+            url_instalacion
+        },{
+            where : {
+                distribucion_id: distribucion.id_distribucion
+            }
+        })*/
+        res.status(200).send(distribucion);
     } catch(error){
         res.status(500).send(error);
     }

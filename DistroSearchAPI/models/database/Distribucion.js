@@ -76,6 +76,16 @@ Informacion_general.belongsTo(Distribucion,{
 });
 
 Distribucion.belongsTo(Distribucion, {
+    as: 'padre',
+    foreignKey:{
+        name: 'familia_id',
+        allowNull: true,
+        alter: true
+    }
+});
+
+Distribucion.hasMany(Distribucion, {
+    as: 'hijos',
     foreignKey:{
         name: 'familia_id',
         allowNull: true,
