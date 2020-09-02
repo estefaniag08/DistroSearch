@@ -172,6 +172,24 @@ exports.mostrarDistribucionesEtiqueta = async (req, res) => {
     }
 }
 
+exports.mostrarHijasDistribucion = async (req, res) => {
+    try {
+        const distro = await Distribucion.findOne({
+            //attributes: { exclude: ['createdAt', 'updatedAt']},
+            where: {
+                nombre_distribucion: req.params.nombreDistro 
+            },
+            include: [{
+                model: Distribucion, as: 'hijos'
+                //attributes: { exclude: ['createdAt', 'updatedAt']}
+            }]
+        })
+        res.status(200).json(distro);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+}
+
 /**
  * Json con la información que puede ir para añadir
  * @param nombre_distribucion Obligatorio

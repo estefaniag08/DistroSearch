@@ -32,7 +32,7 @@ module.exports = function(){
     router.get('/distribuciones/etiquetas/votos', databaseControler.mostrarDistribucionesEtiqueta );
     
     //Mostrar las hijas de una distribución por su nombre
-    router.get('/distribuciones/:nombreDistro/nodos');
+    router.get('/distribuciones/:nombreDistro/nodos', databaseControler.mostrarHijasDistribucion);
     
     //Añadir una distribución (Toda la información)
     router.post('/distribuciones', databaseControler.anadirDistribucion);
