@@ -394,7 +394,6 @@ exports.anadirEtiquetaADistro = async (req, res) => {
         res.status(500).send(error);
     }
 }
-<<<<<<< HEAD
 /**
  * Json con la informacion requerida:
  * @param nombre_etiqueta
@@ -442,13 +441,6 @@ exports.modificarDistribucion = (req, res) => {
             }
         })
     } catch(error){
-=======
-
-exports.votarEtiqueta = async (req, res) => {
-    try {
-        
-    } catch (error) {
->>>>>>> ca222481b72f4a9299e21454bc9ad6bd6ac0f0e9
         res.status(500).send(error);
     }
 }
