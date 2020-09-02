@@ -49,9 +49,9 @@ module.exports = function(){
     //Crear una etiqueta
     router.post('/etiquetas', databaseControler.crearEtiqueta);
     
-    /*
     //Votar por una etiqueta de una distribución
     router.put('/distribuciones/:nombreDistro/etiquetas', databaseControler.votarEtiqueta );
+    /*
 
     //Modificar la información de la distribución
     router.put('/distribuciones/:nombreDistro');

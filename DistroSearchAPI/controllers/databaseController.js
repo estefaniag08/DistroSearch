@@ -151,13 +151,16 @@ exports.mostrarEtiquetas = async (req, res) => {
 exports.mostrarDistribucionesEtiqueta = async (req, res) => {
     try{
         const listaDistribuciones = await Etiquetas.findOne({
+            attributes: { exclude: ['createdAt', 'updatedAt']},
             where: {
                 nombre_etiqueta: req.params.etiqueta
             },
             include: [{
+                attributes: ['votos'],
                 model: Distribucion_etiquetas,
                 include: [{
-                    model: Distribucion
+                    model: Distribucion,
+                    attributes: { exclude: ['createdAt', 'updatedAt']}
                 }]
             }]
             
@@ -388,6 +391,14 @@ exports.anadirEtiquetaADistro = async (req, res) => {
             }
         }
     } catch(error){
+        res.status(500).send(error);
+    }
+}
+
+exports.votarEtiqueta = async (req, res) => {
+    try {
+        
+    } catch (error) {
         res.status(500).send(error);
     }
 }
