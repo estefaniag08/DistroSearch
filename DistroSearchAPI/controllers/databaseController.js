@@ -339,3 +339,53 @@ exports.anadirEtiquetaADistro = async (req, res) => {
         res.status(500).send(error);
     }
 }
+/**
+ * Json con la informacion requerida:
+ * @param nombre_etiqueta
+ */
+exports.votarEtiqueta = async (req, res) => {
+    try{
+        const {nombre_etiqueta} = req.body
+        const etiqueta = await Etiquetas.findOne({
+            where:{
+                nombre_etiqueta
+            }
+        });
+        if(!etiqueta){
+            res.status(500).send('No se encontró la etiqueta');
+        } else {
+            const distribucion = await Distribucion.findOne({
+                where: req.params.nombreDistro
+            })
+            if(!distribucion){
+                res.status(500).send('No se encontró la distribución');
+            } else {
+                const etiquetaVotos = await Distribucion_etiquetas.findOne({
+                    where:{
+                        etiqueta_id: etiqueta.id_etiqueta,
+                        distribucion_id: distribucion.id_distribucion
+                    } 
+                })
+                etiquetaVotos.votos = etiquetaVotos.votos + 1;
+                await etiquetaVotos.save();
+                res.status(200).send('Voto registrado con éxito');
+            }
+        }
+    } catch(error){
+        res.status(500).send(error);
+    }
+}
+//FALTAAAAA
+exports.modificarDistribucion = (req, res) => {
+    try{
+        await Distribucion.update({
+            fecha_ultima_version,
+        },{
+            where: {
+                nombre_distribucion: req.params.nombreDistro
+            }
+        })
+    } catch(error){
+        res.status(500).send(error);
+    }
+}

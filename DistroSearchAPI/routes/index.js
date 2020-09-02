@@ -51,10 +51,10 @@ module.exports = function(){
     router.post('/etiquetas', databaseControler.crearEtiqueta);
 
     //Votar por una etiqueta de una distribución
-    router.put('/distribuciones/:nombreDistro/etiquetas', databaseControler.votarEtiqueta );
+    router.put('/distribuciones/:nombreDistro/etiquetas', databaseControler.votarEtiqueta);
 
     //Modificar la información de la distribución
-    router.put('/distribuciones/:nombreDistro');
+    router.put('/distribuciones/:nombreDistro', databaseControler.modificarDistribucion);
 
     return router;
 }   
