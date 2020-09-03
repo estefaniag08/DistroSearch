@@ -20,7 +20,7 @@ GnuBot.onText(/^\/start/, function(msg){
     })
     
 });
-
+/*
 GnuBot.onText(/^\/botones/, function(msg){
     var chatId = msg.chat.id;
     var botones = {
@@ -45,4 +45,4 @@ GnuBot.onText(/^\/botones/, function(msg){
             GnuBot.sendMessage(chatId, "Acción botón 2");
         }
     })
-})
+})*/
