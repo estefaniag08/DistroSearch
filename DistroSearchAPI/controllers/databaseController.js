@@ -115,7 +115,11 @@ exports.mostrarComentarios = async (req, res) => {
                 attributes: ['comentario_id'],
                 include: [{
                     model: Comentarios,
-                    attributes: { exclude: ['createdAt', 'updatedAt']}
+                    attributes: { exclude: ['createdAt', 'updatedAt']},
+                    include: [{
+                        model: Usuario,
+                        attributes: ['alias']
+                    }]
                 }]
             }]
         })
@@ -150,7 +154,7 @@ exports.mostrarEtiquetas = async (req, res) => {
 
 exports.mostrarDistribucionesEtiqueta = async (req, res) => {
     try{
-        const {etiqueta_nombre} = req.body;
+        const etiqueta_nombre = req.params.nomEtiqueta;
         const listaDistribuciones = await Etiquetas.findOne({
             attributes: { exclude: ['createdAt', 'updatedAt']},
             where: {
@@ -313,7 +317,7 @@ exports.anadirComentario = async (req, res) => {
                 }
             })
             if(!distribucion){
-                res.send(403).send('No se encontró la distribución');
+                res.status(403).send('No se encontró la distribución');
             } else {
                 await Distribucion_comentarios.create({
                     comentario_id: comentarioF.id_comentario,
