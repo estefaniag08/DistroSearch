@@ -9,6 +9,7 @@ const Distribucion_comentarios = require('./Distribucion_comentarios');
 const Comentarios = require('./Comentarios');
 //const Distribucion_etiqueta = require('./Distribucion_etiquetas');
 const Etiqueta = require('./Etiquetas');
+const Usuario = require('./Usuario');
 
 const Distribucion = db.define('distribucion', {
     id_distribucion: {
@@ -152,6 +153,17 @@ Etiqueta.hasMany(Distribucion_etiquetas,{
     }
 });
 
+Usuario.hasMany(Comentarios, {
+    foreignKey: {
+        name: 'usuario_id'
+    }
+})
+
+Comentarios.belongsTo(Usuario, {
+    foreignKey: {
+        name: 'usuario_id'
+    }
+})
 
 /*
 Distribucion.belongsToMany(Comentarios, {
