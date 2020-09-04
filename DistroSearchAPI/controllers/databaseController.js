@@ -45,7 +45,16 @@ exports.mostrarDistribucion = async (req, res) => {
     }
 }
 
-
+exports.mostrarEtiquetas = async (req, res) => {
+    try{
+        const listaEtiquetas = await Etiquetas.findAll({
+            attributes: ['nombre_etiqueta']
+        });
+        res.status(200).json(listaEtiquetas);
+    } catch(error){
+        res.status(500).send(error.message);
+    }
+}
 exports.mostrarInfoGeneral = async (req, res) => {
     try {
         const distribucion = await Distribucion.findOne({
@@ -130,7 +139,7 @@ exports.mostrarComentarios = async (req, res) => {
 }
 
 
-exports.mostrarEtiquetas = async (req, res) => {
+exports.mostrarEtiquetasDistro = async (req, res) => {
     try {
         const distribucion = await Distribucion.findOne({
             attributes: ['id_distribucion', 'nombre_distribucion'],
@@ -139,7 +148,7 @@ exports.mostrarEtiquetas = async (req, res) => {
             },
             include: [{
                 model: Distribucion_etiquetas,
-                attributes: ['etiqueta_id'],
+                attributes: ['etiqueta_id', 'votos'],
                 include: [{
                     model: Etiquetas,
                     attributes: { exclude: ['createdAt', 'updatedAt']}

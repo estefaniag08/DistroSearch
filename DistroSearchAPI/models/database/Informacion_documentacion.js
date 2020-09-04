@@ -10,13 +10,13 @@ const Informacion_documentacion = db.define('informacion_documentacion', {
         autoIncrement: true
     },
     url_distribucion: {
-        type: DataTypes.STRING(50)
+        type: DataTypes.STRING
     },
     url_documentacion: {
-        type: DataTypes.STRING(50)
+        type: DataTypes.STRING
     },
     url_instalacion: {
-        type: DataTypes.STRING(50)
+        type: DataTypes.STRING
     },
     distribucion_id: {
         type: DataTypes.INTEGER

@@ -26,13 +26,16 @@ module.exports = function(){
     router.get('/distribuciones/:nombreDistro/comentarios', databaseControler.mostrarComentarios );
     
     //Mostrar las etiquetas de una distribución por su nombre
-    router.get('/distribuciones/:nombreDistro/etiquetas', databaseControler.mostrarEtiquetas );
+    router.get('/distribuciones/:nombreDistro/etiquetas', databaseControler.mostrarEtiquetasDistro );
     
     //Mostrar todas las distribuciones que tengan la etiqueta especificada
     router.get('/distribuciones/etiquetas/votos/:nomEtiqueta', databaseControler.mostrarDistribucionesEtiqueta );
     
     //Mostrar las hijas de una distribución por su nombre
     router.get('/distribuciones/:nombreDistro/nodos', databaseControler.mostrarHijasDistribucion);
+    
+    //Mostrar todas las etiquetas
+    router.get('/etiquetas', databaseControler.mostrarEtiquetas);
     
     //Añadir una distribución (Toda la información)
     router.post('/distribuciones', databaseControler.anadirDistribucion);
