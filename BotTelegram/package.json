@@ -9,7 +9,7 @@
   "author": "Estefania Garcia y Diego Guerra",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "node-telegram-bot-api": "^0.50.0",
     "telegraf": "^3.38.0"
   }
